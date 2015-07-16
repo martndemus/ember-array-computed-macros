@@ -1,17 +1,9 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 
-import { min, minBy } from 'ember-array-computed-macros';
+import { minBy } from 'ember-array-computed-macros';
 
-module('Unit | Computed | min & minBy');
-
-test('Min of an array property', (assert) => {
-  const subject = Ember.Object.extend({
-    minFoo: min('foos')
-  }).create({ foos: [1, 3, 4, 2] });
-
-  assert.equal(subject.get('minFoo'), 1);
-});
+module('Unit | Computed | minBy');
 
 test('Min by a simple list property', (assert) => {
   const subject = Ember.Object.extend({

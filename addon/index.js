@@ -2,24 +2,14 @@ import Ember from 'ember';
 
 const { compare, computed, get } = Ember;
 
-export var map = function(listProperty, mapFunction) {
-  return computed(`${listProperty}.@each`, function() {
-    return get(this, listProperty).map(mapFunction);
-  }).readOnly();
-};
-
-export var mapBy = function(listProperty, valueProperty) {
-  return computed(`${listProperty}.@each.${valueProperty}`, function() {
-    return get(this, listProperty).map((item) => get(item, valueProperty));
-  }).readOnly();
-};
-
-export var max = function(listProperty) {
-  return computed(`${listProperty}.@each`, function() {
-    const values = get(this, listProperty);
-    return Math.max(...values);
-  }).readOnly();
-};
+// For your convenience
+export var map      = Ember.computed.map;
+export var mapBy    = Ember.computed.mapBy;
+export var max      = Ember.computed.max;
+export var min      = Ember.computed.min;
+export var filter   = Ember.computed.filter;
+export var filterBy = Ember.computed.filterBy;
+export var sort     = Ember.computed.sort;
 
 export var maxBy = function(listProperty, valueProperty) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
@@ -28,35 +18,10 @@ export var maxBy = function(listProperty, valueProperty) {
   }).readOnly();
 };
 
-export var min = function(listProperty) {
-  return computed(`${listProperty}.@each`, function() {
-    const values = get(this, listProperty);
-    return Math.min(...values);
-  }).readOnly();
-};
-
 export var minBy = function(listProperty, valueProperty) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
     const values = get(this, listProperty).map((item) => get(item, valueProperty));
     return Math.min(...values);
-  }).readOnly();
-};
-
-export var filter = function(listProperty, filterFunction) {
-  return computed(`${listProperty}.@each`, function() {
-    return get(this, listProperty).filter(filterFunction);
-  }).readOnly();
-};
-
-export var filterBy = function(listProperty, valueProperty) {
-  return computed(`${listProperty}.@each.${valueProperty}`, function() {
-    return get(this, listProperty).filter((item) => get(item, valueProperty));
-  }).readOnly();
-};
-
-export var sort = function(listProperty, sortFunction = compare ) {
-  return computed(`${listProperty}.@each`, function() {
-    return get(this, listProperty).sort(sortFunction);
   }).readOnly();
 };
 
@@ -90,14 +55,6 @@ export var orderBy = function(listProperty, ...sortProperties) {
       return result;
     });
   }).readOnly();
-};
-
-export var sum = function(listProperty) {
-  return computed(`${listProperty}.@each`, function() {
-    return get(this, listProperty).reduce((sum, item) => {
-      return sum + (item || 0);
-    }, 0);
-  });
 };
 
 export var sumBy = function(listProperty, valueProperty) {
