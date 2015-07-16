@@ -58,6 +58,24 @@ export default Ember.Component.extend({
 * sum
 * sort
 
+
+## Decorators
+
+```js
+import Ember from 'ember';
+import { map } from 'ember-array-computed-macros/decorators';
+
+export default Ember.Component.extend({
+  names: [
+    { first: 'Tom', last: 'Dale' },
+    { first: 'Yehuda', last: 'Katz' }
+  ],
+  
+  @mapBy('names', 'first')
+  firstNames
+});
+```
+
 ## Installation
 
 * `git clone` this repository
