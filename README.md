@@ -1,6 +1,62 @@
-# Ember-array-computed-macros
+# ember-array-computed-macros
 
-This README outlines the details of collaborating on this Ember addon.
+## Usage
+
+### Map
+
+```js
+import Ember from 'ember';
+import { map } from 'ember-array-computed-macros';
+
+export default Ember.Component.extend({
+  names: ['Tom', 'Yehuda'],
+  upperCasedNames: map('names', (name) => name.toUpperCase())
+});
+```
+
+### Map By
+
+```js
+import Ember from 'ember';
+import { map } from 'ember-array-computed-macros';
+
+export default Ember.Component.extend({
+  names: [
+    { first: 'Tom', last: 'Dale' },
+    { first: 'Yehuda', last: 'Katz' }
+  ],
+  firstNames: mapBy('names', 'first')
+});
+```
+
+### Order By
+
+```js
+import Ember from 'ember';
+import { map } from 'ember-array-computed-macros';
+
+export default Ember.Component.extend({
+  names: [
+    { first: 'Tom', last: 'Dale', age: 21 },
+    { first: 'Yehuda', last: 'Katz', age: 42 }
+  ],
+  oderedNames: orderBy('names', 'last', 'first'. 'age:desc')
+});
+```
+
+### Other
+
+* filter
+* filterBy
+* everyBy
+* anyBy
+* min
+* minBy
+* max
+* maxBy
+* reverse
+* sum
+* sort
 
 ## Installation
 
