@@ -1,7 +1,7 @@
 {
   "name": "ember-array-computed-macros",
   "version": "1.0.2",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "This addon is supplemental to the already existing computed macros existing in Ember.js",
   "directories": {
     "doc": "doc",
     "test": "tests"

@@ -1,5 +1,5 @@
 # ember-array-computed-macros
-[![npm version](https://badge.fury.io/js/ember-array-computed-macros.svg)](http://badge.fury.io/js/ember-array-computed-macros) [![Build Status](https://travis-ci.org/martndemus/ember-array-computed-macros.svg?branch=master)](https://travis-ci.org/martndemus/ember-array-computed-macros)
+[![npm version](https://badge.fury.io/js/ember-array-computed-macros.svg)](http://badge.fury.io/js/ember-array-computed-macros) [![Build Status](https://travis-ci.org/martndemus/ember-array-computed-macros.svg?branch=master)](https://travis-ci.org/martndemus/ember-array-computed-macros) [![Ember Observer Score](http://emberobserver.com/badges/ember-array-computed-macros.svg)](http://emberobserver.com/addons/ember-array-computed-macros)
 
 ## Macros
 
