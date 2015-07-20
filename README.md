@@ -1,36 +1,38 @@
 # ember-array-computed-macros
 [![npm version](https://badge.fury.io/js/ember-array-computed-macros.svg)](http://badge.fury.io/js/ember-array-computed-macros) [![Build Status](https://travis-ci.org/martndemus/ember-array-computed-macros.svg?branch=master)](https://travis-ci.org/martndemus/ember-array-computed-macros)
 
-## Usage
+## Macros
 
-### Map
+This addon is supplemental to the already existing array computed macros existing in Ember.js
 
+#### `maxBy(listProperty, valueProperty)`
+
+Takes all values of `valueProperty` from `listProperty` and then picks the maximum value from that.
+
+Example:
 ```js
-import Ember from 'ember';
-import { map } from 'ember-array-computed-macros';
-
-export default Ember.Component.extend({
-  names: ['Tom', 'Yehuda'],
-  upperCasedNames: map('names', (name) => name.toUpperCase())
+var ContactList = Ember.Component.extend({
+  highestAge: maxBy('people', 'age')
 });
+
+const myContactList = ContactList.create({
+  people: [
+    { first: 'Tom', last: 'Dale', age: 21 },
+    { first: 'Yehuda', last: 'Katz', age: 42 }
+  ]
+}).
+
+myContactList.get('highestAge') // returns 42
 ```
 
-### Map By
+### `minBy(listPropery, valueProperty)`
 
-```js
-import Ember from 'ember';
-import { map } from 'ember-array-computed-macros';
+See `maxBy`, except it takes the minimum value instead of the maximum.
+ 
+### `orderBy(listProperty, ...sortProperties)`
 
-export default Ember.Component.extend({
-  names: [
-    { first: 'Tom', last: 'Dale' },
-    { first: 'Yehuda', last: 'Katz' }
-  ],
-  firstNames: mapBy('names', 'first')
-});
-```
-
-### Order By
+Takes a `listProperty` and returns that list sorted by the `sortProperties`.
+Append `:desc` to the sort property to sort in reverse order for that property.
 
 ```js
 import Ember from 'ember';
@@ -45,22 +47,52 @@ export default Ember.Component.extend({
 });
 ```
 
-### Other
+### `sumBy(listProperty, valueProperty)`
 
+Takes all values of `valueProperty` from `listProperty` and then sums those values.
+
+Example:
+```js
+var ContactList = Ember.Component.extend({
+  collectiveAge: sumBy('people', 'age')
+});
+
+const myContactList = ContactList.create({
+  people: [
+    { first: 'Tom', last: 'Dale', age: 21 },
+    { first: 'Yehuda', last: 'Katz', age: 42 }
+  ]
+}).
+
+myContactList.get('collectiveAge') // returns 53
+```
+
+### `reverse(listProperty)`
+
+Reverses the array at `listProperty` with `Array.prototype.reverse`.
+
+### `everyBy(listPropery, valueProperty)`
+
+Takes all values of `valueProperty` from `listProperty` and then checks if all of those values are truthy.
+
+### `anyBy(listProperty, valueProperty)`
+
+Takes all values of `valueProperty` from `listProperty` and then checks if any of those values are truthy.
+
+### From Ember.js
+
+The addon re-exports all array computed macros from Ember.js for convenience.
+
+* map
+* mapBy
 * filter
 * filterBy
-* everyBy
-* anyBy
 * min
-* minBy
 * max
-* maxBy
-* reverse
 * sum
 * sort
 
-
-## Decorators
+## Use with decorators
 
 ```js
 import Ember from 'ember';
