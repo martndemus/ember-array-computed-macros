@@ -10,6 +10,7 @@ export var min      = Ember.computed.min;
 export var filter   = Ember.computed.filter;
 export var filterBy = Ember.computed.filterBy;
 export var sort     = Ember.computed.sort;
+export var sum      = Ember.computed.sum;
 
 export var maxBy = function(listProperty, valueProperty) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
