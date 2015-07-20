@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { compare, computed, get } = Ember;
+const { compare, computed, get, isEqual } = Ember;
 
 // For your convenience
 export var map      = Ember.computed.map;
@@ -85,5 +85,28 @@ export var anyBy = function(listProperty, valueProperty) {
     return get(this, listProperty).reduce((anyTrue, item) => {
       return anyTrue || get(item, valueProperty);
     }, false);
+  });
+};
+
+export var groupBy = function(listProperty, valueProperty) {
+  return computed(`${listProperty}.@each.${valueProperty}`, function() {
+    return get(this, listProperty).reduce((groups, item) => {
+      let group = groups.find((group) => {
+        const firstOfGroup = group.get('firstObject');
+
+        if (firstOfGroup !== undefined) {
+          return isEqual(get(firstOfGroup, valueProperty), get(item, valueProperty));
+        }
+      });
+
+      if (group === undefined) {
+        group = Ember.A();
+        groups.pushObject(group);
+      }
+
+      group.pushObject(item);
+
+      return groups;
+    }, Ember.A());
   });
 };

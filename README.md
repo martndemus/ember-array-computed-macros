@@ -28,7 +28,7 @@ myContactList.get('highestAge') // returns 42
 ### `minBy(listPropery, valueProperty)`
 
 See `maxBy`, except it takes the minimum value instead of the maximum.
- 
+
 ### `orderBy(listProperty, ...sortProperties)`
 
 Takes a `listProperty` and returns that list sorted by the `sortProperties`.
@@ -46,6 +46,41 @@ export default Ember.Component.extend({
   oderedNames: orderBy('names', 'last', 'first'. 'age:desc')
 });
 ```
+
+### `groupBy(listProperty, valueProperty)`
+
+Pushes all items in `listProperty` that have the same value at `valueProperty`
+into an array.
+
+```js
+var ContactList = Ember.Component.extend({
+  groupedByAge: groupBy('people', 'age')
+});
+
+const myContactList = ContactList.create({
+  people: [
+    { first: 'Tom', last: 'Dale', age: 21 },
+    { first: 'Yehuda', last: 'Katz', age: 42 },
+    { first: 'Robert', last: 'Jackson', age: 42 },
+    { first: 'Stefan', last: 'Penner', age 33 }
+  ]
+}).
+
+myContactList.get('groupedByAge') // returns:
+//[
+//  [
+//    { first: 'Tom', last: 'Dale', age: 21 }
+//  ],
+//  [
+//    { first: 'Yehuda', last: 'Katz', age: 42 },
+//    { first: 'Robert', last: 'Jackson', age: 42 }
+//  ],
+//  [
+//    { first: 'Stefan', last: 'Penner', age 33 }
+//  ]
+//]
+```
+
 
 ### `sumBy(listProperty, valueProperty)`
 
