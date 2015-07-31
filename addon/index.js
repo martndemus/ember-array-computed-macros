@@ -26,8 +26,8 @@ export var minBy = function(listProperty, valueProperty) {
   }).readOnly();
 };
 
-export var orderBy = function(listProperty, ...sortProperties) {
-  sortProperties = sortProperties.map((sortProperty) => {
+function _parseSortProperties(sortProperties) {
+  return sortProperties.map((sortProperty) => {
     let descending = false;
 
     if (sortProperty.match(/:desc$/)) {
@@ -37,24 +37,48 @@ export var orderBy = function(listProperty, ...sortProperties) {
 
     return [sortProperty, descending];
   });
+}
 
-  return computed(`${listProperty}.@each`, function() {
-    const list = get(this, listProperty);
+function _orderBy(list, sortProperties) {
+  // Bug/workaround: Ember.ArrayProxy has no method sort.
+  // see: https://github.com/emberjs/ember.js/issues/11936
+  if (typeof list.sort !== 'function' && typeof list.toArray === 'function') {
+    list = list.toArray();
+  }
 
-    return list.sort((item1, item2) => {
-      let result = 0;
+  return list.sort((item1, item2) => {
+    let result = 0;
 
-      sortProperties.forEach(([sortProperty, descending]) => {
-        if (result === 0) {
-          result = compare(get(item1, sortProperty), get(item2, sortProperty));
-          if (result !== 0 && descending) {
-            result = result * -1;
-          }
+    sortProperties.forEach(([sortProperty, descending]) => {
+      if (result === 0) {
+        result = compare(get(item1, sortProperty), get(item2, sortProperty));
+        if (result !== 0 && descending) {
+          result = result * -1;
         }
-      });
-
-      return result;
+      }
     });
+
+    return result;
+  });
+}
+
+export var orderBy = function(listProperty, ...sortProperties) {
+  sortProperties = _parseSortProperties(sortProperties);
+
+  const computedValueKeys = sortProperties.map((item) => item[0]);
+
+  return computed(`${listProperty}.[].{${computedValueKeys.join(',')}}`, function() {
+    const list = get(this, listProperty);
+    return _orderBy(list, sortProperties);
+  }).readOnly();
+};
+
+export var orderByComputedProperty = function(listProperty, orderProperty) {
+  return computed(`${listProperty}.[]`, `${orderProperty}.[]`, function() {
+    const list           = get(this, listProperty);
+    const sortProperties = _parseSortProperties(this.get(orderProperty));
+
+    return _orderBy(list, sortProperties);
   }).readOnly();
 };
 

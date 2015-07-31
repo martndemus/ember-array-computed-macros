@@ -4,6 +4,7 @@ import {
   map as _map,
   mapBy as _mapBy,
   orderBy as _orderBy,
+  orderByComputedProperty as _orderByComputedProperty,
   groupBy as _groupBy,
   filter as _filter,
   filterBy as _filterBy,
@@ -21,6 +22,7 @@ import {
 export var map = macroAlias(_map);
 export var mapBy = macroAlias(_mapBy);
 export var orderBy = macroAlias(_orderBy);
+export var orderByComputedProperty = macroAlias(_orderByComputedProperty);
 export var groupBy = macroAlias(_groupBy);
 export var filter = macroAlias(_filter);
 export var filterBy = macroAlias(_filterBy);
