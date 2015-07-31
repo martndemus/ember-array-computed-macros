@@ -43,7 +43,25 @@ export default Ember.Component.extend({
     { first: 'Tom', last: 'Dale', age: 21 },
     { first: 'Yehuda', last: 'Katz', age: 42 }
   ],
-  oderedNames: orderBy('names', 'last', 'first'. 'age:desc')
+  orderedNames: orderBy('names', 'last', 'first'. 'age:desc')
+});
+```
+
+There is also a variant for `groupBy` that works with a dynamic list of
+sortProperties called `groupByComputedProperty`:
+
+```js
+import Ember from 'ember';
+import { map } from 'ember-array-computed-macros';
+
+export default Ember.Component.extend({
+  names: [
+    { first: 'Tom', last: 'Dale', age: 21 },
+    { first: 'Yehuda', last: 'Katz', age: 42 }
+  ],
+
+  nameOrdering: ['last', 'first', 'age:desc'],
+  orderedNames: orderByComputedProperty('names', 'nameOrdering')
 });
 ```
 
