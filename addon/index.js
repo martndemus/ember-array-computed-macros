@@ -67,7 +67,7 @@ export var orderBy = function(listProperty, ...sortProperties) {
 
   const computedValueKeys = sortProperties.map((item) => item[0]);
 
-  return computed(`${listProperty}.[].{${computedValueKeys.join(',')}}`, function() {
+  return computed(`${listProperty}.@each.{${computedValueKeys.join(',')}}`, function() {
     const list = get(this, listProperty);
     return _orderBy(list, sortProperties);
   }).readOnly();

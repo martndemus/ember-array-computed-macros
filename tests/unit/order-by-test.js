@@ -42,14 +42,16 @@ test('Sorts by multiple properties one desc', (assert) => {
 });
 
 test('Listens for property changes', (assert) => {
-  const first  = Ember.Object.create({ bar: 3 });
-  const second = Ember.Object.create({ bar: 4 });
+  const first  = { bar: 3 };
+  const second = { bar: 4 };
 
   const subject = Ember.Object.extend({
     orderedFoos: orderBy('foos', 'bar'),
   }).create({ foos: Ember.A([first, second]) });
 
-  run(() => first.set('bar', 5));
+  assert.deepEqual(subject.get('orderedFoos'), [first, second]);
+
+  run(() => set(first, 'bar', 5));
 
   assert.deepEqual(subject.get('orderedFoos'), [second, first]);
 });
