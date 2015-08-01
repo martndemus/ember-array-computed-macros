@@ -1,6 +1,6 @@
 {
   "name": "ember-array-computed-macros",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "This addon is supplemental to the already existing computed macros existing in Ember.js",
   "directories": {
     "doc": "doc",
