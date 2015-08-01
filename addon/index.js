@@ -93,7 +93,7 @@ export var sumBy = function(listProperty, valueProperty) {
 export var reverse = function(listProperty) {
   return computed(`${listProperty}.@each`, function() {
     return get(this, listProperty).reverse();
-  });
+  }).readOnly();
 };
 
 export var everyBy = function(listProperty, valueProperty) {
@@ -101,7 +101,7 @@ export var everyBy = function(listProperty, valueProperty) {
     return get(this, listProperty).reduce((allTrue, item) => {
       return allTrue && get(item, valueProperty);
     }, true);
-  });
+  }).readOnly();
 };
 
 export var anyBy = function(listProperty, valueProperty) {
@@ -109,7 +109,7 @@ export var anyBy = function(listProperty, valueProperty) {
     return get(this, listProperty).reduce((anyTrue, item) => {
       return anyTrue || get(item, valueProperty);
     }, false);
-  });
+  }).readOnly();
 };
 
 export var groupBy = function(listProperty, valueProperty) {
@@ -132,5 +132,5 @@ export var groupBy = function(listProperty, valueProperty) {
 
       return groups;
     }, Ember.A());
-  });
+  }).readOnly();
 };
