@@ -91,13 +91,13 @@ export var sumBy = function(listProperty, valueProperty) {
 };
 
 export var reverse = function(listProperty) {
-  return computed(`${listProperty}.@each`, function() {
+  return computed(`${listProperty}.[]`, function() {
     return get(this, listProperty).reverse();
   }).readOnly();
 };
 
 export var everyBy = function(listProperty, valueProperty) {
-  return computed(`${listProperty}.@each`, function() {
+  return computed(`${listProperty}.@each.${valueProperty}`, function() {
     return get(this, listProperty).reduce((allTrue, item) => {
       return allTrue && get(item, valueProperty);
     }, true);
@@ -105,7 +105,7 @@ export var everyBy = function(listProperty, valueProperty) {
 };
 
 export var anyBy = function(listProperty, valueProperty) {
-  return computed(`${listProperty}.@each`, function() {
+  return computed(`${listProperty}.@each.${valueProperty}`, function() {
     return get(this, listProperty).reduce((anyTrue, item) => {
       return anyTrue || get(item, valueProperty);
     }, false);
