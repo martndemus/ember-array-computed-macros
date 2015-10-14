@@ -15,3 +15,7 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
+
+# IntelliJ IDEA / WebStorm project files
+/.idea/
+/*.iml
