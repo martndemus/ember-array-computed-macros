@@ -120,6 +120,28 @@ const myContactList = ContactList.create({
 myContactList.get('collectiveAge') // returns 53
 ```
 
+
+### `meanBy(listProperty, valueProperty)`
+
+Takes all values of `valueProperty` from `listProperty` and calculate their [arithmetic mean](https://en.wikipedia.org/wiki/Arithmetic_mean) value.
+
+Example:
+```js
+var ContactList = Ember.Component.extend({
+  averageAge: meanBy('people', 'age')
+});
+
+const myContactList = ContactList.create({
+  people: [
+    { first: 'Tom', last: 'Dale', age: 21 },
+    { first: 'Yehuda', last: 'Katz', age: 42 }
+  ]
+}).
+
+myContactList.get('collectiveAge') // returns 31.5
+```
+
+
 ### `reverse(listProperty)`
 
 Reverses the array at `listProperty` with `Array.prototype.reverse`.

@@ -90,6 +90,15 @@ export var sumBy = function(listProperty, valueProperty) {
   }).readOnly();
 };
 
+export var meanBy = function(listProperty, valueProperty) {
+  return computed(`${listProperty}.@each.${valueProperty}`, function() {
+    const list = get(this, listProperty);
+    return list.reduce((sum, item) => {
+      return sum + (get(item, valueProperty) || 0);
+    }, 0) / list.length;
+  }).readOnly();
+};
+
 export var reverse = function(listProperty) {
   return computed(`${listProperty}.[]`, function() {
     return get(this, listProperty).reverse();
