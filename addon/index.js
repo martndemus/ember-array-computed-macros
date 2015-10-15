@@ -143,3 +143,26 @@ export var groupBy = function(listProperty, valueProperty) {
     }, Ember.A());
   }).readOnly();
 };
+
+export var reduce = function(listProperty, reduceFunction, initValue) {
+  return computed(`${listProperty}.[]`, function() {
+    if (initValue) {
+      return get(this, listProperty).reduce(reduceFunction, initValue);
+    } else {
+      return get(this, listProperty).reduce(reduceFunction);
+    }
+  }).readOnly();
+};
+
+export var reduceBy = function(listProperty, valueProperty, reduceFunction, initValue) {
+  return computed(`${listProperty}.@each.${valueProperty}`, function() {
+    const values = get(this, listProperty)
+      .map(function(item) { return get(item, valueProperty); });
+
+    if (initValue) {
+      return values.reduce(reduceFunction, initValue);
+    } else {
+      return values.reduce(reduceFunction);
+    }
+  }).readOnly();
+};
