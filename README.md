@@ -99,6 +99,17 @@ myContactList.get('groupedByAge') // returns:
 //]
 ```
 
+### `reduce(listProperty, reduceFunction, initialValue)`
+
+Takes all values of `listProperty` and then reduces those values with the
+`reduceFunction`. If you don't supply an `initialValue`, then the first value of
+the list will be the `initialValue`.
+
+### `reduceBy(listProperty, valueProperty, reduceFunction, initialValue)`
+
+Takes all values of `valueProperty` from `listProperty` and then reduces those
+values with the `reduceFunction`. If you don't supply an `initialValue`, then
+the first value of the list will be the `initialValue`.
 
 ### `sumBy(listProperty, valueProperty)`
 
@@ -178,7 +189,7 @@ export default Ember.Component.extend({
     { first: 'Tom', last: 'Dale' },
     { first: 'Yehuda', last: 'Katz' }
   ],
-  
+
   @mapBy('names', 'first')
   firstNames
 });

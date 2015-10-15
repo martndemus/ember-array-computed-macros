@@ -17,7 +17,9 @@ import {
   reverse as _reverse,
   sum as _sum,
   sort as _sort,
-  meanby as _meanBy
+  meanby as _meanBy,
+  reduce as _reduce,
+  reduceBy as _reduceBy
 } from 'ember-array-computed-macros';
 
 export var map = macroAlias(_map);
@@ -37,3 +39,5 @@ export var reverse = macroAlias(_reverse);
 export var sum = macroAlias(_sum);
 export var sort = macroAlias(_sort);
 export var meanby = macroAlias(_meanBy);
+export var reduce = macroAlias(_reduce);
+export var reduceBy = macroAlias(_reduceBy);
