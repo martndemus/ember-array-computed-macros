@@ -95,7 +95,7 @@ export var meanBy = function(listProperty, valueProperty) {
     const list = get(this, listProperty);
     return list.reduce((sum, item) => {
       return sum + (get(item, valueProperty) || 0);
-    }, 0) / list.length;
+    }, 0) / get(list, 'length');
   }).readOnly();
 };
 
