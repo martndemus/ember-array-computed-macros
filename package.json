@@ -1,47 +1,48 @@
 {
   "name": "ember-array-computed-macros",
-  "version": "1.3.0",
-  "description": "This addon is supplemental to the already existing computed macros existing in Ember.js",
+  "version": "0.0.0",
+  "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server",
     "build": "ember build",
+    "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/martndemus/ember-array-computed-macros",
+  "repository": "",
   "engines": {
     "node": ">= 0.10.0"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "broccoli-asset-rev": "^2.3.0",
-    "ember-cli": "^1.13.8",
-    "ember-cli-app-version": "1.0.0",
+    "broccoli-asset-rev": "^2.2.0",
+    "ember-cli": "1.13.15",
+    "ember-cli-app-version": "^1.0.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.1.0",
-    "ember-cli-htmlbars": "1.0.1",
+    "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
-    "ember-cli-ic-ajax": "0.2.1",
-    "ember-cli-inject-live-reload": "^1.3.0",
-    "ember-cli-qunit": "1.0.3",
-    "ember-cli-release": "0.2.7",
-    "ember-cli-sri": "^1.1.0",
-    "ember-cli-uglify": "^1.0.1",
-    "ember-computed-decorators": "0.1.4",
-    "ember-disable-proxy-controllers": "^1.0.1",
-    "ember-export-application-global": "^1.0.5",
+    "ember-cli-ic-ajax": "0.2.4",
+    "ember-cli-inject-live-reload": "^1.3.1",
+    "ember-cli-qunit": "^1.0.4",
+    "ember-cli-release": "0.2.8",
+    "ember-cli-sri": "^1.2.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-computed-decorators": "^0.1.4",
+    "ember-data": "1.13.15",
     "ember-disable-prototype-extensions": "^1.0.0",
-    "ember-try": "0.0.8"
+    "ember-disable-proxy-controllers": "^1.0.1",
+    "ember-export-application-global": "^1.0.4",
+    "ember-try": "~0.0.8"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.0.0"
+    "ember-cli-babel": "^5.1.5"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
