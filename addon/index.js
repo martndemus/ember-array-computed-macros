@@ -105,15 +105,27 @@ export var reverse = function(listProperty) {
   }).readOnly();
 };
 
-export var everyBy = function(listProperty, valueProperty) {
+export var everyBy = function(listProperty, valueProperty, compareFn) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
-    return get(this, listProperty).every((item) => get(item, valueProperty));
+    let callback;
+    if (typeof compareFn === 'function') {
+      callback = (item) => compareFn(get(item, valueProperty));
+    } else {
+      callback = (item) => get(item, valueProperty);
+    }
+    return get(this, listProperty).every(callback);
   }).readOnly();
 };
 
-export var anyBy = function(listProperty, valueProperty) {
+export var anyBy = function(listProperty, valueProperty, compareFn) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
-    return get(this, listProperty).some((item) => get(item, valueProperty));
+    let callback;
+    if (typeof compareFn === 'function') {
+      callback = (item) => compareFn(get(item, valueProperty));
+    } else {
+      callback = (item) => get(item, valueProperty);
+    }
+    return get(this, listProperty).some(callback);
   }).readOnly();
 };
 
