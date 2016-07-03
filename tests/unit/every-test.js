@@ -36,6 +36,23 @@ test('everyBy with compare function', (assert) => {
   assert.equal(subject.get('teenagerOnly'), true);
 });
 
+test('edge cases', (assert) => {
+  const subject = Ember.Object.extend({
+    anyBy: anyBy('list', 'foo'),
+    everyBy: everyBy('list', 'foo')
+  }).create();
+  assert.equal(subject.get('anyBy'), false, 'anyBy: list is undefined');
+  assert.equal(subject.get('everyBy'), false, 'everyBy: list is undefined');
+
+  subject.set('list', null);
+  assert.equal(subject.get('anyBy'), false, 'anyBy: list is null');
+  assert.equal(subject.get('everyBy'), false, 'everyBy: list is null');
+
+  subject.set('list', []);
+  assert.equal(subject.get('anyBy'), false, 'anyBy: list is empty array');
+  assert.equal(subject.get('everyBy'), true, 'everyBy: list is empty array');
+});
+
 test('anyBy', (assert) => {
   const first  = { bar: false };
   const second = { bar: true };

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { compare, computed, get, isEqual } = Ember;
+const { compare, computed, get, isArray, isEqual } = Ember;
 
 // For your convenience
 export var map      = Ember.computed.map;
@@ -108,24 +108,36 @@ export var reverse = function(listProperty) {
 export var everyBy = function(listProperty, valueProperty, compareFn) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
     let callback;
+    let list = get(this, listProperty);
+
+    if (!isArray(list)) {
+      return false;
+    }
+
     if (typeof compareFn === 'function') {
       callback = (item) => compareFn(get(item, valueProperty));
     } else {
       callback = (item) => get(item, valueProperty);
     }
-    return get(this, listProperty).every(callback);
+    return list.every(callback);
   }).readOnly();
 };
 
 export var anyBy = function(listProperty, valueProperty, compareFn) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
     let callback;
+    let list = get(this, listProperty);
+
+    if (!isArray(list)) {
+      return false;
+    }
+
     if (typeof compareFn === 'function') {
       callback = (item) => compareFn(get(item, valueProperty));
     } else {
       callback = (item) => get(item, valueProperty);
     }
-    return get(this, listProperty).some(callback);
+    return list.some(callback);
   }).readOnly();
 };
 
