@@ -147,23 +147,49 @@ const myContactList = ContactList.create({
     { first: 'Tom', last: 'Dale', age: 21 },
     { first: 'Yehuda', last: 'Katz', age: 42 }
   ]
-}).
+});
 
 myContactList.get('collectiveAge') // returns 31.5
 ```
-
 
 ### `reverse(listProperty)`
 
 Reverses the array at `listProperty` with `Array.prototype.reverse`.
 
-### `everyBy(listPropery, valueProperty)`
+### `everyBy(listPropery, valueProperty, compareFn)`
 
-Takes all values of `valueProperty` from `listProperty` and then checks if all of those values are truthy.
+Takes all values of `valueProperty` from `listProperty` and then checks
+if `compareFn` returns truthy value for all of them.
+Value is provided to `compareFn` as first argument.
 
-### `anyBy(listProperty, valueProperty)`
+If you don't supply a `compareFn` it check if all values are truthy.
 
-Takes all values of `valueProperty` from `listProperty` and then checks if any of those values are truthy.
+```js
+var MovieList = Ember.Component.extend({
+  allHavingReleaseDate: everyBy('movies', 'releasedAt'),
+  allReleasedAfter2000: everyBy('movies', 'releasedAt', function(value) {
+    return value.isAfter('2000-01-01');
+  })
+});
+
+const myMovieList = MovieList.create({
+  movies: [
+    { title: 'La haine', releasedAt: moment('1995-05-31') },
+    { title: 'Sin City', releasedAt: moment('2005-03-28') }
+  ]
+});
+
+myMovieList.get('allHavingReleaseDate'); // true
+myMovieList.get('allReleasedAfter2000'); // false
+```
+
+### `anyBy(listProperty, valueProperty, compareFn)`
+
+Takes all values of `valueProperty` from `listProperty` and then checks
+if `compareFn` returns truthy value for any of them.
+Value is provided to `compareFn` as first argument.
+
+If you don't supply a `compareFn` it check if any value is truthy.
 
 ### From Ember.js
 
