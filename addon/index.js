@@ -107,17 +107,13 @@ export var reverse = function(listProperty) {
 
 export var everyBy = function(listProperty, valueProperty) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
-    return get(this, listProperty).reduce((allTrue, item) => {
-      return allTrue && get(item, valueProperty);
-    }, true);
+    return get(this, listProperty).every((item) => get(item, valueProperty));
   }).readOnly();
 };
 
 export var anyBy = function(listProperty, valueProperty) {
   return computed(`${listProperty}.@each.${valueProperty}`, function() {
-    return get(this, listProperty).reduce((anyTrue, item) => {
-      return anyTrue || get(item, valueProperty);
-    }, false);
+    return get(this, listProperty).some((item) => get(item, valueProperty));
   }).readOnly();
 };
 
