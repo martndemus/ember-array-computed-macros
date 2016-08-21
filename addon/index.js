@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { compare, computed, get, isEqual } = Ember;
+const { compare, computed, get, isEqual, isNone } = Ember;
 
 // For your convenience
 export var map      = Ember.computed.map;
@@ -146,10 +146,10 @@ export var groupBy = function(listProperty, valueProperty) {
 
 export var reduce = function(listProperty, reduceFunction, initValue) {
   return computed(`${listProperty}.[]`, function() {
-    if (initValue) {
-      return get(this, listProperty).reduce(reduceFunction, initValue);
-    } else {
+    if (isNone(initValue)) {
       return get(this, listProperty).reduce(reduceFunction);
+    } else {
+      return get(this, listProperty).reduce(reduceFunction, initValue);
     }
   }).readOnly();
 };
@@ -159,10 +159,10 @@ export var reduceBy = function(listProperty, valueProperty, reduceFunction, init
     const values = get(this, listProperty)
       .map(function(item) { return get(item, valueProperty); });
 
-    if (initValue) {
-      return values.reduce(reduceFunction, initValue);
-    } else {
+    if (isNone(initValue)) {
       return values.reduce(reduceFunction);
+    } else {
+      return values.reduce(reduceFunction, initValue);
     }
   }).readOnly();
 };
